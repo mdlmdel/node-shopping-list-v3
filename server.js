@@ -84,7 +84,6 @@ app.delete('/shopping-list/:id', (req, res) => {
   res.status(204).end();
 });
 
-
 // when new recipe added, ensure has required fields. if not,
 // log error and return 400 status code with hepful message.
 // if okay, add new item, and return it with a status 201.
@@ -103,6 +102,12 @@ app.post('/recipes', jsonParser, (req, res) => {
   res.status(201).json(item);
 });
 
+// Create a DELETE endpoint for /recipes
+app.delete('/recipes/:id', (req, res) => {
+  Recipes.delete(req.params.id);
+  console.log(`Deleted recipe item \`${req.params.id}\``);
+  res.status(204).end();
+});
 
 app.get('/recipes', (req, res) => {
   res.json(Recipes.get());
